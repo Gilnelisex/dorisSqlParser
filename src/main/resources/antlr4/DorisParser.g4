@@ -151,23 +151,22 @@ supportedCreateStatement
     ;
 
 supportedAlterStatement
-    : ALTER VIEW name=multipartIdentifier (LEFT_PAREN cols=simpleColumnDefs RIGHT_PAREN)? AS query                                                                  #alterView
-    | ALTER DATABASE oldDbName=identifier RENAME newDbName=identifier                                                                                                     #alterDatabaseRename
-    | ALTER TABLE oldTableName=multipartIdentifier RENAME newTableName=multipartIdentifier                                                                                          #alterTableRename
-    | ALTER TABLE name=multipartIdentifier MODIFY COMMENT comment=STRING_LITERAL                                                                                    #alterTableModifyTableComment
-    | ALTER TABLE name=multipartIdentifier MODIFY COLUMN colName=identifier COMMENT comment=STRING_LITERAL                                                          #alterTableModifyColumnComment
+    : ALTER VIEW name=multipartIdentifier (LEFT_PAREN cols=simpleColumnDefs RIGHT_PAREN)? AS query                                                                               #alterView
+    | ALTER DATABASE oldDbName=identifier RENAME newDbName=identifier                                                                                                            #alterDatabaseRename
+    | ALTER TABLE oldTableName=multipartIdentifier RENAME newTableName=multipartIdentifier                                                                                       #alterTableRename
+    | ALTER TABLE name=multipartIdentifier MODIFY COMMENT comment=STRING_LITERAL                                                                                                 #alterTableModifyTableComment
     | ALTER TABLE name=multipartIdentifier ADD COLUMN
         (columnDefs (AFTER colName=identifier | FIRST)?  | LEFT_PAREN columnDefs RIGHT_PAREN)
-        (TO rollupName=identifier)? properties=propertyClause?                                                                                                      #alterTableAddColumn
-    | ALTER TABLE name=multipartIdentifier dropColumn = dropColumnDefs                                                                                              #alterTableDropColumn
-    | ALTER TABLE name=multipartIdentifier MODIFY COLUMN columnDefs (AFTER colName=identifier | FIRST)? (FROM rollupName=identifier)? properties=propertyClause?    #alterTableModifyColumn
-    | ALTER TABLE name=multipartIdentifier RENAME COLUMN oldColName=identifier newColName=identifier                                                                      #alterTableRenameColumn
-    | ALTER TABLE name=multipartIdentifier addPartition = addPartitionsDef                                                                                          #alterTableAddPartition
-    | ALTER TABLE name=multipartIdentifier dropPartition = dropPartitionsDef                                                                                        #alterTableDropPartition
+        (TO rollupName=identifier)? properties=propertyClause?                                                                                                                   #alterTableAddColumn
+    | ALTER TABLE name=multipartIdentifier dropColumn=dropColumnDefs                                                                                                             #alterTableDropColumn
+    | ALTER TABLE name=multipartIdentifier MODIFY COLUMN modifyColumn=columnDefs (AFTER colName=identifier | FIRST)? (FROM rollupName=identifier)? properties=propertyClause?    #alterTableModifyColumn
+    | ALTER TABLE name=multipartIdentifier RENAME COLUMN oldColName=identifier newColName=identifier                                                                             #alterTableRenameColumn
+    | ALTER TABLE name=multipartIdentifier addPartition=addPartitionsDef                                                                                                         #alterTableAddPartition
+    | ALTER TABLE name=multipartIdentifier dropPartition=dropPartitionsDef                                                                                                       #alterTableDropPartition
     | ALTER TABLE name=multipartIdentifier MODIFY PARTITION
         (partitionName=identifier| (LEFT_PAREN (ASTERISK | (partitionNames+=identifier (COMMA partitionNames+=identifier)*)) RIGHT_PAREN))
-        SET (LEFT_PAREN partitionProperties=propertyItemList RIGHT_PAREN)?                                                                                          #alterTableModifyPartition
-    | ALTER TABLE name=multipartIdentifier RENAME PARTITION oldPartitionName=identifier newPartitionName=identifier                                                       #alterTableRenamePartition
+        SET (LEFT_PAREN partitionProperties=propertyItemList RIGHT_PAREN)?                                                                                                       #alterTableModifyPartition
+    | ALTER TABLE name=multipartIdentifier RENAME PARTITION oldPartitionName=identifier newPartitionName=identifier                                                              #alterTableRenamePartition
     ;
 
 supportedDropStatement

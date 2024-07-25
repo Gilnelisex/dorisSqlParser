@@ -1,5 +1,6 @@
 package com.gilnelisex.demo;
 
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,8 +11,8 @@ public class ParseDorisSqlController {
 
     private final ParseDorisSqlService parseDorisSqlService;
 
-    @GetMapping("/sql")
-    public void getDehoopToken(@RequestParam String sql) {
-        parseDorisSqlService.parse(sql);
+    @PostMapping("/sql")
+    public void getDehoopToken(@RequestBody Map<String, String> sql) {
+        parseDorisSqlService.parse(sql.get("sql"));
     }
 }
