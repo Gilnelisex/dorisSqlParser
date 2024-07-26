@@ -1,4 +1,4 @@
-package com.gilnelisex.demo;
+package com.gilnelisex.demo.antlr4;
 
 import java.util.Map;
 import lombok.RequiredArgsConstructor;

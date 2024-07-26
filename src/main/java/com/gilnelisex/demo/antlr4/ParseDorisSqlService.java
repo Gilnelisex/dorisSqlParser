@@ -1,7 +1,5 @@
-package com.gilnelisex.demo;
+package com.gilnelisex.demo.antlr4;
 
-import com.gilnelisex.demo.antlr4.DorisLexer;
-import com.gilnelisex.demo.antlr4.DorisParser;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
